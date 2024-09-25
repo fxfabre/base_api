@@ -1,15 +1,10 @@
 import logging
-import os
 from collections.abc import Awaitable
-from typing import Callable, Any, Dict
+from typing import Callable
 
-import fastapi
-from fastapi import FastAPI
-from fastapi import Request
+from fastapi import FastAPI, Request
 from fastapi_utils.timing import add_timing_middleware
-from starlette.responses import JSONResponse
-from starlette.responses import RedirectResponse
-from starlette.responses import Response
+from starlette.responses import JSONResponse, RedirectResponse, Response
 
 from src.controllers import router
 from src.controllers.healthcheck import healthcheck_router
@@ -32,7 +27,9 @@ app.include_router(healthcheck_router, prefix="/healthcheck")
 
 
 @app.middleware("http")
-async def add_process_time_header(request: Request, call_next: Callable[[Request], Awaitable[Response]]) -> Response:
+async def add_process_time_header(
+    request: Request, call_next: Callable[[Request], Awaitable[Response]]
+) -> Response:
     logger.debug("Request on %s", request.url)
     return await call_next(request)
 
