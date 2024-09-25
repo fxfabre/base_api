@@ -1,0 +1,8 @@
+services:
+
+  api:
+    build: .
+    container_name: custom_container_name
+    restart: always
+    ports:
+      - 5010:5000

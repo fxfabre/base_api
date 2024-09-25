@@ -1,0 +1,18 @@
+# API
+fastapi
+fastapi-utils
+uvicorn[standard]
+gunicorn
+httptools
+inotify
+uvloop
+
+# config
+python-json-logger
+
+# API libs
+pandas
+pydantic[email]
+
+# missing dependency in fastapi_utils
+typing-inspect
