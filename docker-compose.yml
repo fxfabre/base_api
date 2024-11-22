@@ -2,7 +2,7 @@ services:
 
   api:
     build: .
-    container_name: custom_container_name
+    container_name: template_api
     restart: always
     ports:
-      - 5010:5000
+      - "5010:5000"

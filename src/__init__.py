@@ -1,5 +1,6 @@
 import logging.config
 
+# Not required to load the logger config here, gunicorn do it
 logging.config.fileConfig("config/logging.ini")
 
 logging.captureWarnings(True)
