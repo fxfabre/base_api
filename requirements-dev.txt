@@ -1,13 +1,9 @@
 -r requirements.txt
 
 # Dev tools
-pip-tools
 sqlfluff
 flake8
 mypy
-
-# Code quality, git hooks
-pre-commit
 
 # Tests
 parameterized

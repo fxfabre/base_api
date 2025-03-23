@@ -32,7 +32,7 @@ workers = 2
 #       gunicorn.workers.base.Worker. The default provided values
 #       can be seen at
 #       http://docs.gunicorn.org/en/latest/settings.html#worker-class
-worker_class = "uvicorn.workers.UvicornWorker"
+worker_class = "uvicorn_worker.UvicornWorker"
 threads = 1
 
 #   worker_connections - For the eventlet and gevent worker classes
