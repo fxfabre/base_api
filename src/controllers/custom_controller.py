@@ -1,4 +1,5 @@
 import logging
+import time
 
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
@@ -11,6 +12,7 @@ router = APIRouter()
 
 @router.get("/", response_model=CustomModel, response_class=JSONResponse)
 async def get() -> CustomModel:
+    time.sleep(1)
     response = CustomModel(
         date=datetime.utcnow().isoformat(),
         message="Hello, World!",

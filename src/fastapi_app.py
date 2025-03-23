@@ -3,7 +3,9 @@ from collections.abc import Awaitable
 from typing import Callable
 
 from fastapi import FastAPI, Request
+from fastapi.responses import HTMLResponse
 from fastapi_utils.timing import add_timing_middleware
+from pyinstrument import Profiler
 from starlette.responses import JSONResponse, RedirectResponse, Response
 
 from src.controllers import router
@@ -32,6 +34,18 @@ async def add_process_time_header(
 ) -> Response:
     logger.debug("Request on %s", request.url)
     return await call_next(request)
+
+
+@app.middleware("http")
+async def profile_request(request: Request, call_next) -> Response:
+    if request.headers.get("X-profiling", False):
+        profiler = Profiler(interval = 0.001)
+        profiler.start()
+        response = await call_next(request)
+        profiler.stop()
+        return HTMLResponse(profiler.output_html())
+    else:
+        return await call_next(request)
 
 
 @app.get("/", include_in_schema=False)
